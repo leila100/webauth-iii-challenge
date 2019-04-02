@@ -68,7 +68,7 @@ router.post("/api/login", (req, res) => {
           const token = generateToken(user) // Create token because user is valid
           res.status(200).json({ message: `Welcome ${user.username}!`, token }) // Send token to client
         } else {
-          res.status(400).json({ message: "Invalid Credentials" })
+          res.status(400).json({ errorMessage: "Invalid Credentials" })
         }
       })
       .catch(error => {
