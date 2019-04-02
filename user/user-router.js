@@ -5,7 +5,7 @@ const restricted = require("../util/restricted")
 const Users = require("./user-model.js")
 
 router.get("/", restricted, (req, res) => {
-  const { department } = req.userInfo
+  const { department } = req.userInfo // userInfo contains all the user info: username, department
   Users.fetchByDepartment(department)
     .then(users => {
       res.json(users)
