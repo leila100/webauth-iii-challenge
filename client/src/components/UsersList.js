@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import axios from "axios"
-import { Link } from "react-router-dom"
 
 import { UserListWrapper, UserInfo } from "../styles/userStyles"
 import { Button } from "../styles/formStyles"

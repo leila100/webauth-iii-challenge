@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 import axios from "axios"
+import { Link } from "react-router-dom"
 
 import { Message } from "../../styles/commonStyles"
-import { FormWrapper, FormGroup, Button } from "../../styles/formStyles"
+import { FormWrapper, FormGroup, Button, Footer } from "../../styles/formStyles"
 
 class Signup extends Component {
   constructor(props) {
@@ -68,6 +69,9 @@ class Signup extends Component {
           <Button type='submit'>
             <i className='fas fa-sign-in-alt' /> Sign In
           </Button>
+          <Footer>
+            Have to registered? <Link to='/signup'>Sign Up</Link>
+          </Footer>
         </form>
       </FormWrapper>
     )
