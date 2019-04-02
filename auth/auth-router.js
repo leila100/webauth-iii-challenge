@@ -24,9 +24,11 @@ router.post("/api/register", (req, res) => {
 
   if (!user.username || !user.password || !user.department) {
     res.status(400).json({
-      errorMessage: "Please provide a username, password, and department."
+      errorMessage: "Please provide a email, password, and department."
     })
   } else {
+    user.department = user.department.toUpperCase()
+
     //generate hash from user's password
     const hash = bcrypt.hashSync(user.password, 10) //2 ^ n times
 
@@ -44,7 +46,7 @@ router.post("/api/register", (req, res) => {
       .catch(error => {
         console.log(error)
         res.status(500).json({
-          error: "There was an error saving the new user to the database"
+          errorMessage: "There was an error saving the new user to the database"
         })
       })
   }
@@ -72,7 +74,7 @@ router.post("/api/login", (req, res) => {
       .catch(error => {
         console.log(err)
         res.status(500).json({
-          error: "There was an error logging user"
+          errorMessage: "There was an error logging user"
         })
       })
   }
