@@ -50,4 +50,29 @@ router.post("/api/register", (req, res) => {
   }
 })
 
+router.post("/api/login", (req, res) => {
+  let { username, password } = req.body
+
+  if (!username || !password) {
+    res.status(400).json({
+      errorMessage: "Please provide a username, and password."
+    })
+  } else {
+    Users.find({ username }) // Check username exist in database
+      .first()
+      .then(user => {
+        if (user && bcrypt.compareSync(password, user.password)) {
+          // Check that password is same as in database
+          const token = generateToken(user) // Create token because user is valid
+          res.status(200).json({ message: `Welcome ${user.username}!`, token }) // Send token to client
+        } else {
+          res.status(400).json({ message: "Invalid Credentials" })
+        }
+      })
+      .catch(error => {
+        res.status(500).json(error)
+      })
+  }
+})
+
 module.exports = router
