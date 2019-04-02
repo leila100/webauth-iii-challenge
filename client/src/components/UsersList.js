@@ -1,7 +1,9 @@
 import React, { Component } from "react"
 import axios from "axios"
+import { Link } from "react-router-dom"
 
 import { UserListWrapper, UserInfo } from "../styles/userStyles"
+import { Button } from "../styles/formStyles"
 
 class UsersList extends Component {
   state = {
@@ -20,11 +22,17 @@ class UsersList extends Component {
         this.setState({ users: response.data })
       })
       .catch(error => {
-        const message =
-          error.response.data.errorMessage || "Something went wrong!"
+        let message = "Something went wrong!"
+        if (error.response) message = error.response.data.errorMessage
         console.log(message)
         this.setState({ message: message })
       })
+  }
+
+  logoutHandler = event => {
+    event.preventDefault()
+    localStorage.removeItem("token")
+    this.props.history.push("/signin")
   }
 
   render() {
@@ -47,6 +55,9 @@ class UsersList extends Component {
             )
           })}
         </ul>
+        <Button danger onClick={this.logoutHandler}>
+          Sign Out
+        </Button>
       </UserListWrapper>
     )
   }

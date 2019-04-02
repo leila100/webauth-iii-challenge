@@ -57,8 +57,9 @@ export const Button = styled.button`
   outline: none;
 
   :hover {
-    background: #abb4ba;
-    color: #2779a5;
+    background-color: ${props => (props.danger ? "#b21028" : "#abb4ba")};
+    /* background: #abb4ba; */
+    color: ${props => (props.danger ? "white" : "#2779a5")};
     font-weight: bold;
   }
 `
@@ -73,5 +74,26 @@ export const Footer = styled.div`
       text-decoration: underline;
       color: #2779a5;
     }
+  }
+`
+
+export const FormLink = styled.div`
+  padding: 10px 5%;
+  width: 50%;
+  margin-left: 10%;
+  margin-top: 15px;
+  background-color: #274759;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  text-align: center;
+
+  a {
+    color: white;
+    font-size: 2rem;
+  }
+
+  :hover {
+    background: #b21028;
   }
 `

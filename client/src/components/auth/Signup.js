@@ -34,8 +34,8 @@ class Signup extends Component {
         this.props.history.push("/users")
       })
       .catch(error => {
-        const message =
-          error.response.data.errorMessage || "Something went wrong!"
+        let message = "Something went wrong!"
+        if (error.response) message = error.response.data.errorMessage
         this.setState({ message: message })
       })
   }
