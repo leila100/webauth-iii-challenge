@@ -27,9 +27,8 @@ class Signup extends Component {
         password
       })
       .then(response => {
-        console.log(response.data)
         localStorage.setItem("token", response.data.token)
-        this.props.history.push("/")
+        this.props.history.push("/users")
       })
       .catch(error => {
         const message =
@@ -44,7 +43,7 @@ class Signup extends Component {
         <Message error>{this.state.message}</Message>
         <form onSubmit={this.loginHandler}>
           <FormGroup>
-            <i className='fas fa-envelope' />
+            <i className='fas fa-user' />
             <input
               type='text'
               placeholder='Username'
@@ -67,7 +66,7 @@ class Signup extends Component {
           </FormGroup>
 
           <Button type='submit'>
-            <i className='fas fa-user-plus' /> Sign In
+            <i className='fas fa-sign-in-alt' /> Sign In
           </Button>
         </form>
       </FormWrapper>

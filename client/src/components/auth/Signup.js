@@ -31,7 +31,7 @@ class Signup extends Component {
       })
       .then(response => {
         localStorage.setItem("token", response.data.token)
-        this.props.history.push("/")
+        this.props.history.push("/users")
       })
       .catch(error => {
         const message =
@@ -46,7 +46,7 @@ class Signup extends Component {
         <Message error>{this.state.message}</Message>
         <form onSubmit={this.registerHandler}>
           <FormGroup>
-            <i className='fas fa-envelope' />
+            <i className='fas fa-user' />
             <input
               type='text'
               placeholder='Username'

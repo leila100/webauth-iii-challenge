@@ -9,13 +9,13 @@ module.exports = function restricted(req, res, next) {
     jwt.verify(token, secret, (err, decodedToken) => {
       if (err) {
         // The token has been modified or expired
-        res.status(401).json({ message: "You shall not pass!" })
+        res.status(401).json({ errorMessage: "You shall not pass!" })
       } else {
         req.userInfo = decodedToken
         next()
       }
     })
   } else {
-    res.status(401).json({ message: "You shall not pass!" })
+    res.status(401).json({ errorMessage: "You shall not pass!" })
   }
 }

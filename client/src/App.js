@@ -1,15 +1,15 @@
 import React, { Component } from "react"
 import { Route } from "react-router-dom"
 
-import Home from "./components/Home"
 import Signup from "./components/auth/Signup"
 import Signin from "./components/auth/Signin"
+import UsersList from "./components/UsersList"
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Route exact path='/' component={Home} />
+        <Route path='/users' component={UsersList} />
         <Route path='/signup' component={Signup} />
         <Route path='/signin' component={Signin} />
       </div>
