@@ -3,7 +3,8 @@ const db = require("../database/dbConfig.js")
 module.exports = {
   add,
   find,
-  fetchAll
+  fetchAll,
+  fetchByDepartment
 }
 
 async function add(user) {
@@ -17,4 +18,8 @@ function find(condition) {
 
 function fetchAll() {
   return db("users")
+}
+
+function fetchByDepartment(department) {
+  return db("users").where({ department: department })
 }
