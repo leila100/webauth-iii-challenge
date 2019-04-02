@@ -33,7 +33,7 @@ router.post("/api/register", (req, res) => {
     //override use.password with hash
     user.password = hash
 
-    //Create token with user info
+    //Create token with user info - Login the user when registering
     const token = generateToken(user)
 
     // Add user to database and send back response, with token info
@@ -70,7 +70,10 @@ router.post("/api/login", (req, res) => {
         }
       })
       .catch(error => {
-        res.status(500).json(error)
+        console.log(err)
+        res.status(500).json({
+          error: "There was an error logging user"
+        })
       })
   }
 })
