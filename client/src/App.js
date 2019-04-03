@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Route } from "react-router-dom"
+import { Route, Redirect, Switch } from "react-router-dom"
 
 import Signup from "./components/auth/Signup"
 import Signin from "./components/auth/Signin"
@@ -9,9 +9,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route path='/users' component={UsersList} />
-        <Route path='/signup' component={Signup} />
-        <Route path='/signin' component={Signin} />
+        <Switch>
+          <Route path='/users' component={UsersList} />
+          <Route path='/signup' component={Signup} />
+          <Route path='/signin' component={Signin} />
+          <Redirect exact from='/' to='/users' />
+        </Switch>
       </div>
     )
   }
