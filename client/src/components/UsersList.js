@@ -13,8 +13,11 @@ class UsersList extends Component {
   componentDidMount = () => {
     const token = localStorage.getItem("token")
     if (!token) this.props.history.push("/signup")
+    // const endpoint = "http://localhost:8080/api/users"
+    const endpoint = "https://webauth-iii-challenge.herokuapp.com/api/users"
+
     axios
-      .get("http://localhost:8080/api/users", {
+      .get(endpoint, {
         headers: { Authorization: token }
       })
       .then(response => {

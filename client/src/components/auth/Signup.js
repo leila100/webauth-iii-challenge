@@ -23,8 +23,10 @@ class Signup extends Component {
   registerHandler = event => {
     event.preventDefault()
     const { username, password, department } = this.state
+    // const endpoint = "http://localhost:8080/api/register"
+    const endpoint = "https://webauth-iii-challenge.herokuapp.com/api/register"
     axios
-      .post("http://localhost:8080/api/register", {
+      .post(endpoint, {
         username,
         password,
         department
