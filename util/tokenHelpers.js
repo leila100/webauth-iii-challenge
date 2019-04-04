@@ -1,8 +1,25 @@
 const jwt = require("jsonwebtoken")
 
-const secret = process.env.JWT_SECRET || "is it secret, is it safe?"
+const secret = process.env.JWT_SECRET
 
-module.exports = function restricted(req, res, next) {
+module.exports = {
+  generateToken,
+  restrict
+}
+
+function generateToken(user) {
+  const payload = {
+    subject: user.id,
+    username: user.username,
+    department: user.department
+  }
+  const options = {
+    expiresIn: "1d"
+  }
+  return jwt.sign(payload, secret, options)
+}
+
+function restrict(req, res, next) {
   const token = req.headers.authorization
   if (token) {
     // Check if the token is valid

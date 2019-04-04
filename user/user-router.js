@@ -1,10 +1,10 @@
 const express = require("express")
 const router = express.Router()
 
-const restricted = require("../util/restricted")
+const restrict = require("../util/tokenHelpers").restrict
 const Users = require("./user-model.js")
 
-router.get("/", restricted, (req, res) => {
+router.get("/", restrict, (req, res) => {
   const { department } = req.userInfo // userInfo contains all the user info: username, department
   Users.fetchByDepartment(department)
     .then(users => {

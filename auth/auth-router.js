@@ -1,23 +1,9 @@
 const express = require("express")
 const router = express.Router()
 const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
 
+const generateToken = require("../util/tokenHelpers").generateToken
 const Users = require("../user/user-model")
-
-const secret = process.env.JWT_SECRET || "This is a secret"
-
-function generateToken(user) {
-  const payload = {
-    subject: user.id,
-    username: user.username,
-    department: user.department
-  }
-  const options = {
-    expiresIn: "1d"
-  }
-  return jwt.sign(payload, secret, options)
-}
 
 router.post("/api/register", (req, res) => {
   const user = req.body
