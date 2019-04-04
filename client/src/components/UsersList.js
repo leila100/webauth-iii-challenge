@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 import axios from "axios"
 
+import requireAuth from "../hoc/requireAuth"
+
 import { UserListWrapper, UserInfo } from "../styles/userStyles"
-import { Button } from "../styles/formStyles"
 
 class UsersList extends Component {
   state = {
@@ -11,15 +12,11 @@ class UsersList extends Component {
   }
 
   componentDidMount = () => {
-    const token = localStorage.getItem("token")
-    if (!token) this.props.history.push("/signup")
     // const endpoint = "http://localhost:8080/api/users"
-    const endpoint = "https://webauth-iii-challenge.herokuapp.com/api/users"
+    // const endpoint = "https://webauth-iii-challenge.herokuapp.com/api/users"
 
     axios
-      .get(endpoint, {
-        headers: { Authorization: token }
-      })
+      .get("/users")
       .then(response => {
         this.setState({ users: response.data })
       })
@@ -29,12 +26,6 @@ class UsersList extends Component {
         console.log(message)
         this.setState({ message: message })
       })
-  }
-
-  logoutHandler = event => {
-    event.preventDefault()
-    localStorage.removeItem("token")
-    this.props.history.push("/signin")
   }
 
   render() {
@@ -57,12 +48,9 @@ class UsersList extends Component {
             )
           })}
         </ul>
-        <Button danger onClick={this.logoutHandler}>
-          Sign Out
-        </Button>
       </UserListWrapper>
     )
   }
 }
 
-export default UsersList
+export default requireAuth(UsersList)

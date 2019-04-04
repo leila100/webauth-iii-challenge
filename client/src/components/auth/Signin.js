@@ -23,14 +23,15 @@ class Signup extends Component {
     event.preventDefault()
     const { username, password } = this.state
     // const endpoint = "http://localhost:8080/api/login"
-    const endpoint = "https://webauth-iii-challenge.herokuapp.com/api/login"
+    const endpoint = `${process.env.REACT_APP_API_URL}/api/login`
+
     axios
       .post(endpoint, {
         username,
         password
       })
       .then(response => {
-        localStorage.setItem("token", response.data.token)
+        localStorage.setItem("jwt", response.data.token)
         this.props.history.push("/users")
       })
       .catch(error => {
@@ -72,7 +73,7 @@ class Signup extends Component {
             <i className='fas fa-sign-in-alt' /> Sign In
           </Button>
           <Footer>
-            Have to registered? <Link to='/signup'>Sign Up</Link>
+            Have to register? <Link to='/signup'>Sign Up</Link>
           </Footer>
         </form>
       </FormWrapper>

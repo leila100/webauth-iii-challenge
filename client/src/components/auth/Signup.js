@@ -24,7 +24,7 @@ class Signup extends Component {
     event.preventDefault()
     const { username, password, department } = this.state
     // const endpoint = "http://localhost:8080/api/register"
-    const endpoint = "https://webauth-iii-challenge.herokuapp.com/api/register"
+    const endpoint = `${process.env.REACT_APP_API_URL}/api/register`
     axios
       .post(endpoint, {
         username,
@@ -32,7 +32,7 @@ class Signup extends Component {
         department
       })
       .then(response => {
-        localStorage.setItem("token", response.data.token)
+        localStorage.setItem("jwt", response.data.token)
         this.props.history.push("/users")
       })
       .catch(error => {
